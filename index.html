@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Erler Oto | Lüks Yedek Parça</title>
+  <meta name="description" content="Porsche, Maserati ve seçkin otomobiller için orijinal ve uyumlu yedek parçalar.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement">Seçili ürünlerde ücretsiz, sigortalı teslimat <span>→</span></div>
+  <header class="site-header">
+    <a class="logo" href="#top" aria-label="Erler Oto ana sayfa"><span>E</span><strong>ERLER<br><em>OTO</em></strong></a>
+    <nav class="main-nav" aria-label="Ana menü">
+      <a href="#catalog" data-page="catalog">Katalog</a><a href="#brands" data-page="brands">Markalar</a><a href="#why" data-page="about">Biz Kimiz</a>
+    </nav>
+    <div class="header-actions"><button class="icon-button" aria-label="Ara">⌕</button><button class="lang">TR <span>⌄</span></button><button class="cart" aria-label="Sepet">Sepet <b>0</b></button></div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy"><p class="eyebrow">SEÇKİN OTOMOBİLLER İÇİN</p><h1>Otomobilinizin<br><i>karakteri</i> bozulmasın.</h1><p class="hero-text">Lüks segment araçlar için doğrulanmış OEM parçalar. Doğru parçayı, ilk seferde bulun.</p><div class="hero-meta"><span><strong>12.480+</strong> ürün</span><span><strong>24 saat</strong> hızlı çıkış</span></div></div>
+      <div class="hero-visual"><div class="hero-glow"></div><div class="hero-label">PORSCHE<br><small>Genuine selection</small></div></div>
+      <div class="hero-search" id="search-panel"><div class="search-tabs"><button class="active" data-tab="vehicle">Aracıma göre ara</button><button data-tab="code">OEM / Şasi no ile ara</button></div><form id="vehicle-form" class="search-form"><label>Marka<select id="brand-select"><option value="">Marka seçin</option><option value="porsche">Porsche</option><option value="maserati">Maserati</option><option value="ferrari">Ferrari</option><option value="lamborghini">Lamborghini</option><option value="bentley">Bentley</option><option value="aston-martin">Aston Martin</option></select></label><label>Model<select id="model-select" disabled><option value="">Önce marka seçin</option></select></label><label>Yıl<select id="year-select" disabled><option value="">Önce model seçin</option></select></label><button class="primary" type="submit">Parçaları göster <span>↗</span></button></form><form id="code-form" class="search-form hidden"><label class="wide">OEM kodu veya şasi numarası<input placeholder="Örn. 9A1 615 123 A" autocomplete="off"></label><button class="primary" type="submit">Ara <span>↗</span></button></form><p class="form-message" aria-live="polite"></p></div>
+    </section>
+
+    <section class="trust-strip" id="why"><div><span class="trust-icon">◈</span><strong>Doğrulanmış uyumluluk</strong><small>Şasi bazlı kontrol</small></div><div><span class="trust-icon">◇</span><strong>Güvenli gönderim</strong><small>Özenli, sigortalı teslimat</small></div><div><span class="trust-icon">◌</span><strong>Uzman desteği</strong><small>Parça danışmanınıza ulaşın</small></div></section>
+
+    <section class="section" id="brands"><div class="section-head"><div><p class="eyebrow">SEÇKİN GARAJ</p><h2>Markanızı seçin</h2></div><a class="text-link" href="#brands" data-page="brands">Tüm markalar <span>↗</span></a></div><div class="brand-grid"><a class="brand-card porsche" data-brand="porsche" href="#search-panel"><span>01</span><strong>PORSCHE</strong><small>911 · Cayenne · Macan</small></a><a class="brand-card maserati" data-brand="maserati" href="#search-panel"><span>02</span><strong>MASERATI</strong><small>Ghibli · Levante · Grecale</small></a><a class="brand-card ferrari" data-brand="ferrari" href="#search-panel"><span>03</span><strong>FERRARI</strong><small>488 · Roma · Purosangue</small></a><a class="brand-card bentley" data-brand="bentley" href="#search-panel"><span>04</span><strong>BENTLEY</strong><small>Continental · Bentayga</small></a><a class="brand-card lamborghini" data-brand="lamborghini" href="#search-panel"><span>05</span><strong>LAMBORGHINI</strong><small>Urus · Huracan · Revuelto</small></a><a class="brand-card aston-martin" data-brand="aston-martin" href="#search-panel"><span>06</span><strong>ASTON MARTIN</strong><small>DBX · Vantage · DB12</small></a><a class="brand-card tesla" data-brand="tesla" href="#search-panel"><span>07</span><strong>TESLA</strong><small>Model S · Model 3 · Model X</small></a><a class="brand-card alfa-romeo" data-brand="alfa-romeo" href="#search-panel"><span>08</span><strong>ALFA ROMEO</strong><small>Giulia · Stelvio · Tonale</small></a></div></section>
+
+    <section class="section products" id="catalog"><div class="section-head"><div><p class="eyebrow">EDITÖRÜN SEÇİMİ</p><h2>Garajın temel parçaları</h2></div><a class="text-link" href="#catalog" data-page="catalog">Kataloğa git <span>↗</span></a></div><div class="product-grid"><article class="product-card" data-brand="porsche"><div class="product-image image-filter"><span class="product-tag">OEM</span></div><div class="product-info"><small>PORSCHE · 911 / 992</small><h3>Hava filtresi</h3><strong>₺4.280 <del>₺4.850</del></strong></div></article><article class="product-card" data-brand="maserati"><div class="product-image image-disc"><span class="product-tag sale">-12%</span></div><div class="product-info"><small>MASERATI · LEVANTE</small><h3>Ön fren diski seti</h3><strong>₺18.900 <del>₺21.500</del></strong></div></article><article class="product-card" data-brand="ferrari"><div class="product-image image-belt"><span class="product-tag">OEM</span></div><div class="product-info"><small>FERRARI · 488</small><h3>Motor kayış seti</h3><strong>₺12.650</strong></div></article><article class="product-card" data-brand="bentley"><div class="product-image image-bentley"><span class="product-tag">OEM</span></div><div class="product-info"><small>BENTLEY · CONTINENTAL GT</small><h3>Ön hava süspansiyon seti</h3><strong>₺34.800</strong></div></article></div></section>
+  </main>
+  <section class="page-view" id="page-view" aria-hidden="true"></section>
+  <aside class="cart-drawer" aria-label="Sepet özeti" aria-hidden="true"><div class="drawer-head"><div><p class="eyebrow">SİPARİŞİNİZ</p><h2>Sepetiniz</h2></div><button class="close-cart" type="button" aria-label="Sepeti kapat">×</button></div><div class="cart-items"></div><div class="cart-empty">Sepetiniz henüz boş.</div><div class="cart-total"><span>Toplam</span><strong>₺0</strong></div><button class="checkout" type="button">Ödemeye geç <span>↗</span></button></aside>
+  <div class="product-modal" aria-hidden="true"><div class="product-modal-card"><button class="close-modal" type="button" aria-label="Ürün detayını kapat">×</button><p class="eyebrow">ÜRÜN DETAYI</p><h2 class="modal-name"></h2><p class="modal-fit">OEM uyumlu · Şasi bazlı doğrulama</p><strong class="modal-price"></strong><button class="modal-add" type="button">Sepete ekle <span>+</span></button></div></div>
+  <footer><a class="logo" href="#top"><span>E</span><strong>ERLER<br><em>OTO</em></strong></a><p>Selected parts for exceptional machines.</p><a href="fal-ai-studio.html">Medya Stüdyosu ↗</a><small>© 2026 Erler Oto</small></footer>
+  <script src="script.js"></script>
+</body>
+</html>
