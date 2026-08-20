@@ -1,6 +1,16 @@
 const form = document.querySelector('#media-form');
 const message = document.querySelector('#studio-message');
 const result = document.querySelector('#generation-result');
+const themeToggle = document.querySelector('.theme-toggle');
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem('erler-theme', theme);
+  themeToggle.innerHTML = theme === 'dark' ? '☼ <span>Light</span>' : '◐ <span>Dark</span>';
+}
+
+setTheme(localStorage.getItem('erler-theme') || 'dark');
+themeToggle.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();

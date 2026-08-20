@@ -1,4 +1,5 @@
 const tabs = document.querySelectorAll('.search-tabs button');
+const themeToggle = document.querySelector('.theme-toggle');
 const vehicleForm = document.querySelector('#vehicle-form');
 const codeForm = document.querySelector('#code-form');
 const message = document.querySelector('.form-message');
@@ -34,6 +35,16 @@ const productModal = document.querySelector('.product-modal');
 const modalName = document.querySelector('.modal-name');
 const modalPrice = document.querySelector('.modal-price');
 let selectedProduct = null;
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem('erler-theme', theme);
+  themeToggle.innerHTML = theme === 'dark' ? '☼ <span>Light</span>' : '◐ <span>Dark</span>';
+  themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç');
+}
+
+setTheme(localStorage.getItem('erler-theme') || 'dark');
+themeToggle.addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
 function loadLocalMedia(element) {
   const source = element.dataset.media;
