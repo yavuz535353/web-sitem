@@ -47,9 +47,9 @@ const verifiedVehicleMedia = {
   ferrari: 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1200&q=85',
   lamborghini: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1200&q=85',
   tesla: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85',
-  maserati: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maserati_Levante_S_(02).jpg',
-  bentley: 'https://commons.wikimedia.org/wiki/Special:FilePath/2019_Bentley_Continental_GT_V8_Automatic_4.0_Front.jpg',
-  'aston-martin': 'https://commons.wikimedia.org/wiki/Special:FilePath/2021_Aston_Martin_DBX_in_Midnight_Blue%2C_rear_left.jpg'
+  maserati: 'assets/vehicles/Maserati.jpg',
+  bentley: 'assets/vehicles/Bentley.jpg',
+  'aston-martin': 'assets/vehicles/Aston martin.jpg'
 };
 
 document.querySelectorAll('.brand-card[data-brand]').forEach((card) => {

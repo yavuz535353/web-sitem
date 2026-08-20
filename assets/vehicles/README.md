@@ -7,12 +7,10 @@ Bu klasöre yalnızca doğru marka/model fotoğraflarını yükleyin. Dosya adla
 - lamborghini-urus.jpg
 - tesla-model-s.jpg
 
-Şimdilik doğrulanmış Wikimedia Commons görselleri kullanılan kartlar (yerel dosya yüklenene kadar):
+Eklenen yerel araç görselleri:
 
-- Maserati Levante
-- Bentley Continental GT
-- Aston Martin DBX
-
-Kaynak: Wikimedia Commons dosyaları, model sayfalarındaki ilgili araç görselleri. Üretim yayını öncesi görsel lisans/atıf bilgisi ayrıca kontrol edilmelidir.
+- `Maserati.jpg`
+- `Bentley.jpg`
+- `Aston martin.jpg`
 
 Öneri: JPG veya WebP, en az 1600 px genişlik, otomobilin tamamı görünür ve başka marka/model içermeyen fotoğraf.
