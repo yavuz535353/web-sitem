@@ -23,6 +23,13 @@ const vehicleData = {
   bentley: { name: 'Bentley', models: ['Continental GT', 'Bentayga', 'Flying Spur'], years: ['2024', '2023', '2022'] },
   'aston-martin': { name: 'Aston Martin', models: ['DBX', 'Vantage', 'DB12'], years: ['2024', '2023', '2022'] }
 };
+const porscheParts = [
+  { model: '911', years: '1964-1989 · 964 · 993 · 996 · 997 · 991 · 992', category: 'Motor', name: 'Hava filtresi', oem: '9P1 129 620', price: '₺4.280' },
+  { model: '911', years: '964 · 993 · 996 · 997', category: 'Fren', name: 'Ön fren diski seti', oem: '964 351 041 04', price: '₺18.900' },
+  { model: 'Cayenne', years: '958 · 9Y0', category: 'Süspansiyon', name: 'Havalı süspansiyon körüğü', oem: '9Y0 616 039', price: '₺22.450' },
+  { model: 'Macan', years: '95B · 95B.2', category: 'Filtreler', name: 'Yağ filtre seti', oem: '95B 115 561', price: '₺2.180' },
+  { model: 'Panamera', years: '971 · 972', category: 'Motor', name: 'Motor kayış seti', oem: '971 903 137', price: '₺9.750' }
+];
 const productModal = document.querySelector('.product-modal');
 const modalName = document.querySelector('.modal-name');
 const modalPrice = document.querySelector('.modal-price');
@@ -88,6 +95,7 @@ document.querySelectorAll('.brand-card').forEach((card) => {
 
 const pageTemplates = {
   catalog: `<div class="page-inner"><button class="back-home" data-close-page>← Ana sayfaya dön</button><p class="eyebrow">ERLER OTO KATALOĞU</p><h1>Doğru parçayı<br><i>doğrudan</i> bulun.</h1><div class="catalog-toolbar"><strong>Seçili ürünler</strong><span>12.480 ürün</span><button class="filter-button">Filtreler +</button></div><div class="product-grid catalog-grid"></div></div>`,
+  porsche: `<div class="page-inner porsche-catalog"><button class="back-home" data-close-page>← Ana sayfaya dön</button><p class="eyebrow">PORSCHE PARÇA KATALOĞU</p><h1>Porsche için<br><i>doğru parça.</i></h1><p class="page-lead">Modelinizi seçin; motor, fren, süspansiyon ve filtre kategorilerindeki uyumlu parçaları görüntüleyin.</p><div class="model-switcher"><button class="active" data-porsche-model="all">Tüm modeller</button><button data-porsche-model="911">911</button><button data-porsche-model="Cayenne">Cayenne</button><button data-porsche-model="Macan">Macan</button><button data-porsche-model="Panamera">Panamera</button></div><div class="catalog-toolbar"><strong class="porsche-results-label">Tüm Porsche parçaları</strong><span class="porsche-results-count">5 ürün</span><button class="filter-button">Kategoriler +</button></div><div class="porsche-categories"><button class="active" data-porsche-category="all">Tümü</button><button data-porsche-category="Motor">Motor</button><button data-porsche-category="Fren">Fren</button><button data-porsche-category="Süspansiyon">Süspansiyon</button><button data-porsche-category="Filtreler">Filtreler</button></div><div class="porsche-parts-list"></div></div>`,
   brands: `<div class="page-inner"><button class="back-home" data-close-page>← Ana sayfaya dön</button><p class="eyebrow">SEÇKİN GARAJ</p><h1>Lüks otomobil<br><i>markaları.</i></h1><p class="page-lead">Otomobilinizin karakterine uygun, doğrulanmış parçaları marka bazında keşfedin.</p><div class="brand-grid page-brands"></div></div>`,
   about: `<div class="page-inner about-page"><button class="back-home" data-close-page>← Ana sayfaya dön</button><p class="eyebrow">ERLER OTO HAKKINDA</p><h1>Parçadan önce<br><i>güven.</i></h1><p class="page-lead">Erler Oto, seçkin otomobiller için doğru parçayı bulma deneyimini sadeleştirir. Her ürün; OEM kodu, araç uyumluluğu ve stok bilgisiyle kontrol edilir.</p><div class="about-stats"><strong>12.480+<small>ürün</small></strong><strong>24 sa<small>hızlı çıkış</small></strong><strong>7/24<small>uzman desteği</small></strong></div></div>`,
   checkout: `<div class="page-inner checkout-page"><button class="back-home" data-close-page>← Alışverişe dön</button><p class="eyebrow">GÜVENLİ SİPARİŞ</p><h1>Siparişinizi<br><i>tamamlayın.</i></h1><div class="checkout-layout"><form class="checkout-form"><label>Ad soyad<input required placeholder="Adınız ve soyadınız"></label><label>E-posta<input required type="email" placeholder="ornek@email.com"></label><label>Adres<textarea required placeholder="Teslimat adresiniz"></textarea></label><button class="primary" type="submit">Siparişi onayla <span>↗</span></button></form><div class="checkout-note"><strong>Güvenli ödeme</strong><p>Ödeme sağlayıcısı bağlantısı hazır olduğunda bu adım sunucu tarafı doğrulamayla çalışacaktır.</p><strong class="checkout-sum">Toplam: ₺0</strong></div></div></div>`
@@ -99,6 +107,12 @@ function openPage(page, brandFilter = '') {
   pageView.classList.add('open');
   pageView.setAttribute('aria-hidden', 'false');
   history.pushState({ page, brandFilter }, '', brandFilter ? `#catalog/${brandFilter}` : `#${page}`);
+  if (page === 'catalog' && brandFilter === 'porsche') {
+    pageView.innerHTML = pageTemplates.porsche;
+    pageView.querySelector('[data-close-page]').addEventListener('click', closePage);
+    renderPorscheParts();
+    return;
+  }
   if (page === 'catalog') {
     const products = [...document.querySelectorAll('main .product-card')].filter((card) => !brandFilter || card.dataset.brand === brandFilter);
     const brandName = vehicleData[brandFilter]?.name;
@@ -111,6 +125,18 @@ function openPage(page, brandFilter = '') {
     document.querySelector('.page-brands').innerHTML = [...document.querySelectorAll('.brand-card')].map((card) => card.outerHTML).join('');
   }
   pageView.querySelector('[data-close-page]').addEventListener('click', closePage);
+}
+
+function renderPorscheParts(model = 'all', category = 'all') {
+  const filtered = porscheParts.filter((part) => (model === 'all' || part.model === model) && (category === 'all' || part.category === category));
+  const list = pageView.querySelector('.porsche-parts-list');
+  if (!list) return;
+  list.innerHTML = filtered.map((part) => `<article class="porsche-part-row"><div><small>${part.category} · PORSCHE ${part.model}</small><h3>${part.name}</h3><span>OEM ${part.oem} · ${part.years}</span></div><strong>${part.price}</strong><button class="part-detail" type="button">Detay <span>↗</span></button></article>`).join('') || '<p class="empty-results">Bu seçim için parça bulunamadı.</p>';
+  const modelLabel = model === 'all' ? 'Tüm Porsche parçaları' : `Porsche ${model} parçaları`;
+  pageView.querySelector('.porsche-results-label').textContent = modelLabel;
+  pageView.querySelector('.porsche-results-count').textContent = `${filtered.length} ürün`;
+  pageView.querySelectorAll('[data-porsche-model]').forEach((button) => button.classList.toggle('active', button.dataset.porscheModel === model));
+  pageView.querySelectorAll('[data-porsche-category]').forEach((button) => button.classList.toggle('active', button.dataset.porscheCategory === category));
 }
 
 function closePage() {
@@ -163,6 +189,16 @@ document.querySelectorAll('.product-card').forEach((card) => {
 });
 
 pageView.addEventListener('click', (event) => {
+  const porscheModel = event.target.closest('[data-porsche-model]');
+  if (porscheModel) {
+    renderPorscheParts(porscheModel.dataset.porscheModel, pageView.querySelector('[data-porsche-category].active')?.dataset.porscheCategory || 'all');
+    return;
+  }
+  const porscheCategory = event.target.closest('[data-porsche-category]');
+  if (porscheCategory) {
+    renderPorscheParts(pageView.querySelector('[data-porsche-model].active')?.dataset.porscheModel || 'all', porscheCategory.dataset.porscheCategory);
+    return;
+  }
   const pageBrand = event.target.closest('.page-brands .brand-card');
   if (pageBrand) {
     event.preventDefault();
