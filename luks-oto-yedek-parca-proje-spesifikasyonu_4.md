@@ -53,22 +53,21 @@ Yüklenen 4 örnek site incelendi. Aşağıda her birinden platforma taşınacak
 
 ---
 
-## 3. GÖRSEL VE MEDYA ÜRETİM SİSTEMİ
+## 3. GÖRSEL VE MEDYA SİSTEMİ
 
-- **Altyapı:** Fal.ai API entegrasyonu
-- **Model:** Nanobana 2 (FLUX / Nano Banana 2)
-- **Kapsam:** Banner, kategori ve konsept görselleri
-- **Standart:** Otomotiv sektörüne uygun, yüksek çözünürlüklü, ürünle doğrudan alakalı
-- **Kapsam Dışı:** Blog/makale görselleri üretilmeyecek — sistem yalnızca e-ticaret görselleri üretecek şekilde kısıtlanacak
-
-**Uygulama Notu:** Görsel üretim prompt şablonları, marka bazlı (Porsche kırmızı/siyah stüdyo estetiği, Maserati krom/lacivert vb.) ön tanımlı stil paketleri olarak tutulmalı; her görsel isteğinde marka + parça tipi + kompozisyon stili parametre olarak geçirilmeli.
+- **Ürün görselleri:** Yalnızca Erler Oto'nun gerçek stok fotoğrafları kullanılacak.
+- **Araç görselleri:** Marka ve model ile birebir eşleşen doğrulanmış fotoğraflar kullanılacak; başka marka/model görseli kullanılmayacak.
+- **Dosya yapısı:** Araç görselleri `assets/vehicles/`, parça görselleri `assets/parts/` altında tutulacak.
+- **Standart:** Ürün tamamen görünür, temiz arka planlı ve yüksek çözünürlüklü JPG/WebP kullanılacak.
+- **Eksik medya davranışı:** Görsel yüklenmemişse yanlış veya alakasız görsel gösterilmeyecek; stok görselinin beklediği açıkça belirtilecek.
+- **Fal.ai kapsamı:** Ürün görseli üretiminde kullanılmayacak. İleride yalnızca konsept/banner üretimi için opsiyonel operasyon aracı olabilir.
 
 ---
 
 ## 4. ODAKLANILAN LÜKS ARAÇ KATALOĞU
 
 **Öncelikli Yüksek Satış Grubu:** Porsche, Maserati
-**Diğer Odak Markalar:** Bentley, Ferrari, Lamborghini, Aston Martin, Tesla, Alfa Romeo
+**Diğer Odak Markalar:** Bentley, Ferrari, Lamborghini, Aston Martin, Tesla
 
 *(Not: Tüm otomobil markaları kapsam dışıdır — sadece yukarıdaki üst segment gruplar listelenecek.)*
 
@@ -147,7 +146,7 @@ src/
 │       └── LoadingSkeleton/
 ├── lib/
 │   ├── i18n/                        # next-intl veya benzeri
-│   ├── fal-ai/                      # Görsel üretim servis katmanı
+│   ├── media/                       # Stok ve araç görseli eşleme katmanı
 │   └── oem-arama/                   # Şase/OEM sorgu servisi
 └── styles/
     └── animasyonlar/                # Framer Motion / GSAP geçiş tanımları
@@ -159,8 +158,8 @@ src/
 - Sepet sunucu tarafında doğrulanacak; istemciden gelen fiyat veya indirim tutarı kabul edilmeyecektir.
 - OEM/şasi sorgusu, veri kaynağı adapter arayüzü arkasında tutulacaktır. İlk adapter mock veriyle başlayabilir.
 - Ödeme sağlayıcısı `PaymentProvider` benzeri bir arayüzle değiştirilebilir olacaktır.
-- Fal.ai yalnızca sunucu tarafında çağrılacak; görsel üretimi kullanıcı isteğiyle değil, yetkili operasyon akışıyla tetiklenecektir.
-- Görseller CDN veya obje depolama üzerinden servis edilecek; API yanıtları doğrudan tarayıcıya aktarılmayacaktır.
+- Ürün ve araç görselleri CDN veya obje depolama üzerinden servis edilecek; ürün kartı yalnızca doğrulanmış medya kaydını gösterecektir.
+- Fal.ai aktif ürün görseli akışının parçası değildir; varsa yalnızca yetkili konsept/banner operasyonunda kullanılacaktır.
 
 ### 5.2 Önerilen Teknoloji Yığını
 
@@ -169,7 +168,7 @@ src/
 - **Animasyon:** Framer Motion (sayfa geçişleri, hover efektleri, sayaç animasyonları)
 - **State/Sepet:** Zustand veya Redux Toolkit
 - **i18n:** next-intl (TR, EN, DE, ZH çeviri anahtarları JSON bazlı)
-- **Görsel Üretim:** Fal.ai API (Nanobana 2 modeli) — build-time veya admin panelden tetiklenen içerik üretim pipeline'ı
+- **Görsel Yönetimi:** Gerçek stok görselleri için CDN/obje depolama ve ürün medya manifesti
 
 ---
 

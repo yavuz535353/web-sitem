@@ -16,18 +16,50 @@ const modelSelect = document.querySelector('#model-select');
 const yearSelect = document.querySelector('#year-select');
 const vehicleData = {
   porsche: { name: 'Porsche', models: ['911', 'Cayenne', 'Macan', 'Panamera'], years: ['2024', '2023', '2022', '2021'] },
-  maserati: { name: 'Maserati', models: ['Ghibli', 'Levante', 'Grecale', 'Quattroporte'], years: ['2024', '2023', '2022'] },
   ferrari: { name: 'Ferrari', models: ['488', 'Roma', 'Purosangue', '296 GTB'], years: ['2024', '2023', '2022'] },
   lamborghini: { name: 'Lamborghini', models: ['Urus', 'Huracan', 'Revuelto'], years: ['2024', '2023', '2022'] },
+  tesla: { name: 'Tesla', models: ['Model S', 'Model 3', 'Model X', 'Model Y'], years: ['2024', '2023', '2022'] },
+  maserati: { name: 'Maserati', models: ['Ghibli', 'Levante', 'Grecale'], years: ['2024', '2023', '2022'] },
   bentley: { name: 'Bentley', models: ['Continental GT', 'Bentayga', 'Flying Spur'], years: ['2024', '2023', '2022'] },
   'aston-martin': { name: 'Aston Martin', models: ['DBX', 'Vantage', 'DB12'], years: ['2024', '2023', '2022'] }
-  ,tesla: { name: 'Tesla', models: ['Model S', 'Model 3', 'Model X', 'Model Y'], years: ['2024', '2023', '2022'] },
-  'alfa-romeo': { name: 'Alfa Romeo', models: ['Giulia', 'Stelvio', 'Tonale'], years: ['2024', '2023', '2022'] }
 };
 const productModal = document.querySelector('.product-modal');
 const modalName = document.querySelector('.modal-name');
 const modalPrice = document.querySelector('.modal-price');
 let selectedProduct = null;
+
+function loadLocalMedia(element) {
+  const source = element.dataset.media;
+  if (!source) return;
+  const image = new Image();
+  image.onload = () => {
+    element.style.setProperty('--media-image', `url("${source}")`);
+    element.classList.add('media-ready');
+  };
+  image.onerror = () => {
+    element.classList.add('media-missing');
+  };
+  image.src = source;
+}
+
+const verifiedVehicleMedia = {
+  porsche: 'https://images.unsplash.com/photo-1611651338412-8403fa6e3599?auto=format&fit=crop&w=1200&q=85',
+  ferrari: 'https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1200&q=85',
+  lamborghini: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1200&q=85',
+  tesla: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85',
+  maserati: 'https://commons.wikimedia.org/wiki/Special:FilePath/Maserati_Levante_S_(02).jpg',
+  bentley: 'https://commons.wikimedia.org/wiki/Special:FilePath/2019_Bentley_Continental_GT_V8_Automatic_4.0_Front.jpg',
+  'aston-martin': 'https://commons.wikimedia.org/wiki/Special:FilePath/2021_Aston_Martin_DBX_in_Midnight_Blue%2C_rear_left.jpg'
+};
+
+document.querySelectorAll('.brand-card[data-brand]').forEach((card) => {
+  if (verifiedVehicleMedia[card.dataset.brand]) card.dataset.media = verifiedVehicleMedia[card.dataset.brand];
+});
+
+const heroMedia = document.querySelector('.hero-visual.vehicle-media');
+if (heroMedia) heroMedia.dataset.media = verifiedVehicleMedia.porsche;
+
+document.querySelectorAll('[data-media]').forEach(loadLocalMedia);
 
 function fillSelect(select, placeholder, values, disabled = false) {
   select.innerHTML = `<option value="">${placeholder}</option>${values.map((value) => `<option value="${value}">${value}</option>`).join('')}`;
